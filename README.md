@@ -10,13 +10,13 @@ rabbit [-hlcropd] filename.png > output.txt
 
 ## Command line options
 
--h - Print help  
--l - Align image to the left (uses [left] tags)  
--c - Align image to the center (uses [center] tags)  
--r - Align image to the right (uses [right] tags)  
--o - Optimise output (removes unneeded spaces, depends on alignment)  
--p - Paint (uses [color=#XXXXXX] tags)  
--d - Double. Use double block instead of single. More characters needed, but looks better.  
+`-h` (`--help    `) - Print help  
+`-l` (`--left    `) - Align image to the left (uses [left] tags)  
+`-c` (`--center  `) - Align image to the center (uses [center] tags)  
+`-r` (`--right   `) - Align image to the right (uses [right] tags)  
+`-o` (`--optimise`) - Optimise output (removes unneeded spaces, depends on alignment)  
+`-p` (`--paint   `) - Paint (uses [color=#XXXXXX] tags)  
+`-d` (`--double  `) - Double. Use double block instead of single. More characters needed, but looks better.  
 
 ## Trasparency support
 
