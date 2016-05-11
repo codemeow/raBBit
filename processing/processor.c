@@ -119,31 +119,28 @@ RBBErrors subprocessleft()
 
             if ((!same) && (x != 0))
             {
-                strcat(colstring, LBRACKET);
-                strcat(colstring, COLOR_C);
-                strcat(colstring, RBRACKET);
+                sprintf(colstring + strlen(colstring), "%s%s%s",
+                        LBRACKET, COLOR_C, RBRACKET);
                 strcat(datastring, colstring);
                 colstring[0] = '\0';
             }
 
             if (!same)
             {
-                strcat(colstring, LBRACKET);
-                strcat(colstring, COLOR_O);
-                strcat(colstring, EQUALITY);
                 if (warehouse.flags.paint)
-                    strcat(colstring, cols);
-                strcat(colstring, RBRACKET);
-                strcat(colstring, BLOCK);
+                    sprintf(colstring + strlen(colstring), "%s%s%s%s%s%s",
+                            LBRACKET, COLOR_O, EQUALITY, cols, RBRACKET, BLOCK);
+                else
+                    sprintf(colstring + strlen(colstring), "%s%s%s%s%s",
+                            LBRACKET, COLOR_O, EQUALITY,       RBRACKET, BLOCK);
             }
                 else strcat(colstring, BLOCK);
 
             opixel = cpixel;
         }
 
-        strcat(colstring, LBRACKET);
-        strcat(colstring, COLOR_C);
-        strcat(colstring, RBRACKET);
+        sprintf(colstring + strlen(colstring), "%s%s%s",
+                LBRACKET, COLOR_C, RBRACKET);
         if (!(warehouse.flags.optimisation))
             strcat(datastring, colstring);
         else if ((cpixel.alpha == RBB_TRANS_LEVEL))
@@ -207,22 +204,20 @@ RBBErrors subprocesscenter()
 
             if ((!same) && (x != xlimit[y]))
             {
-                strcat(colstring, LBRACKET);
-                strcat(colstring, COLOR_C);
-                strcat(colstring, RBRACKET);
+                sprintf(colstring + strlen(colstring), "%s%s%s",
+                        LBRACKET, COLOR_C, RBRACKET);
                 strcat(datastring, colstring);
                 colstring[0] = '\0';
             }
 
             if (!same)
             {
-                strcat(colstring, LBRACKET);
-                strcat(colstring, COLOR_O);
-                strcat(colstring, EQUALITY);
                 if (warehouse.flags.paint)
-                    strcat(colstring, cols);
-                strcat(colstring, RBRACKET);
-                strcat(colstring, BLOCK);
+                    sprintf(colstring + strlen(colstring), "%s%s%s%s%s%s",
+                            LBRACKET, COLOR_O, EQUALITY, cols, RBRACKET, BLOCK);
+                else
+                    sprintf(colstring + strlen(colstring), "%s%s%s%s%s",
+                            LBRACKET, COLOR_O, EQUALITY,       RBRACKET, BLOCK);
             }
                 else strcat(colstring, BLOCK);
 
@@ -231,9 +226,8 @@ RBBErrors subprocesscenter()
 
         if (used)
         {
-            strcat(colstring, LBRACKET);
-            strcat(colstring, COLOR_C);
-            strcat(colstring, RBRACKET);
+            sprintf(colstring + strlen(colstring), "%s%s%s",
+                    LBRACKET, COLOR_C, RBRACKET);
             strcat(datastring, colstring);
         }
 
@@ -260,7 +254,7 @@ RBBErrors subprocessright()
         char  colstring[4096];  colstring[0] = '\0';
         char datastring[4096]; datastring[0] = '\0';
 
-        for (x = 0; x < warehouse.image.width; x++)
+        for (x = startx; x < warehouse.image.width; x++)
         {
             char cols_s[20]; char * cols = cols_s;
 
@@ -284,31 +278,29 @@ RBBErrors subprocessright()
 
             if ((!same) && (x != startx))
             {
-                strcat(colstring, LBRACKET);
-                strcat(colstring, COLOR_C);
-                strcat(colstring, RBRACKET);
+                sprintf(colstring + strlen(colstring), "%s%s%s",
+                        LBRACKET, COLOR_C, RBRACKET);
                 strcat(datastring, colstring);
                 colstring[0] = '\0';
             }
 
             if (!same)
             {
-                strcat(colstring, LBRACKET);
-                strcat(colstring, COLOR_O);
-                strcat(colstring, EQUALITY);
                 if (warehouse.flags.paint)
-                    strcat(colstring, cols);
-                strcat(colstring, RBRACKET);
-                strcat(colstring, BLOCK);
+                    sprintf(colstring + strlen(colstring), "%s%s%s%s%s%s",
+                            LBRACKET, COLOR_O, EQUALITY, cols, RBRACKET, BLOCK);
+                else
+                    sprintf(colstring + strlen(colstring), "%s%s%s%s%s",
+                            LBRACKET, COLOR_O, EQUALITY,       RBRACKET, BLOCK);
             }
                 else strcat(colstring, BLOCK);
 
             opixel = cpixel;
         }
 
-        strcat(colstring, LBRACKET);
-        strcat(colstring, COLOR_C);
-        strcat(colstring, RBRACKET);
+        if (startx != warehouse.image.width)
+            sprintf(colstring + strlen(colstring), "%s%s%s",
+                    LBRACKET, COLOR_C, RBRACKET);
         strcat(datastring, colstring);
 
         printf("%s\n", datastring);
