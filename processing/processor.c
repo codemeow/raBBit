@@ -101,8 +101,12 @@ RBBErrors subprocessleft()
         RBBPixel cpixel;
         RBBPixel opixel = getpixel(0, y);
         RBBBool    same = RBB_FALSE;
-        char  colstring[4096];  colstring[0] = '\0';
-        char datastring[4096]; datastring[0] = '\0';
+        char * colstring = /* Pessimistic size */
+                malloc(strlen("[color=transparent]XX[/color]") *
+                       warehouse.image.width + 1);
+        if (!colstring)
+            error(RBB_ERRORS_BADALLOC);
+        colstring[0] = '\0';
 
         for (x = 0; x < warehouse.image.width; x++)
         {
@@ -121,7 +125,7 @@ RBBErrors subprocessleft()
             {
                 sprintf(colstring + strlen(colstring), "%s%s%s",
                         LBRACKET, COLOR_C, RBRACKET);
-                strcat(datastring, colstring);
+                printf("%s", colstring);
                 colstring[0] = '\0';
             }
 
@@ -142,11 +146,11 @@ RBBErrors subprocessleft()
         sprintf(colstring + strlen(colstring), "%s%s%s",
                 LBRACKET, COLOR_C, RBRACKET);
         if (!(warehouse.flags.optimisation))
-            strcat(datastring, colstring);
+            printf("%s", colstring);
         else if ((cpixel.alpha == RBB_TRANS_LEVEL))
-            strcat(datastring, colstring);
+            printf("%s", colstring);
 
-        printf("%s\n", datastring);
+        printf("\n");
     }
     printf("[/left]\n");
 
@@ -185,8 +189,12 @@ RBBErrors subprocesscenter()
         RBBPixel opixel = getpixel(0, y);
         RBBBool    same = RBB_FALSE;
         RBBBool    used = RBB_FALSE;
-        char  colstring[4096];  colstring[0] = '\0';
-        char datastring[4096]; datastring[0] = '\0';
+        char * colstring = /* Pessimistic size */
+                malloc(strlen("[color=transparent]XX[/color]") *
+                       warehouse.image.width + 1);
+        if (!colstring)
+            error(RBB_ERRORS_BADALLOC);
+        colstring[0] = '\0';
 
         for (x = xlimit[y]; x < (warehouse.image.width - xlimit[y]); x++)
         {
@@ -205,8 +213,8 @@ RBBErrors subprocesscenter()
             if ((!same) && (x != xlimit[y]))
             {
                 sprintf(colstring + strlen(colstring), "%s%s%s",
-                        LBRACKET, COLOR_C, RBRACKET);
-                strcat(datastring, colstring);
+                        LBRACKET, COLOR_C, RBRACKET);                
+                printf("%s", colstring);
                 colstring[0] = '\0';
             }
 
@@ -228,10 +236,10 @@ RBBErrors subprocesscenter()
         {
             sprintf(colstring + strlen(colstring), "%s%s%s",
                     LBRACKET, COLOR_C, RBRACKET);
-            strcat(datastring, colstring);
+            printf("%s", colstring);
         }
 
-        printf("%s\n", datastring);
+        printf("\n");
     }
     printf("[/center]\n");
 
@@ -251,8 +259,12 @@ RBBErrors subprocessright()
         RBBBool    same = RBB_FALSE;
         RBBBool   first = RBB_TRUE;
         uint32_t startx = 0;
-        char  colstring[4096];  colstring[0] = '\0';
-        char datastring[4096]; datastring[0] = '\0';
+        char * colstring = /* Pessimistic size */
+                malloc(strlen("[color=transparent]XX[/color]") *
+                       warehouse.image.width + 1);
+        if (!colstring)
+            error(RBB_ERRORS_BADALLOC);
+        colstring[0] = '\0';
 
         for (x = startx; x < warehouse.image.width; x++)
         {
@@ -280,7 +292,7 @@ RBBErrors subprocessright()
             {
                 sprintf(colstring + strlen(colstring), "%s%s%s",
                         LBRACKET, COLOR_C, RBRACKET);
-                strcat(datastring, colstring);
+                printf("%s", colstring);
                 colstring[0] = '\0';
             }
 
@@ -301,9 +313,7 @@ RBBErrors subprocessright()
         if (startx != warehouse.image.width)
             sprintf(colstring + strlen(colstring), "%s%s%s",
                     LBRACKET, COLOR_C, RBRACKET);
-        strcat(datastring, colstring);
-
-        printf("%s\n", datastring);
+        printf("%s\n", colstring);
     }
     printf("[/right]\n");
 
