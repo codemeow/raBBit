@@ -20,6 +20,7 @@
 
 #include <png.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../definitions/helpers.h"
 #include "../definitions/consts.h"
 #include "../processing/processor.h"
