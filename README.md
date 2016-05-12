@@ -39,3 +39,8 @@ rabbit -lodp hamton.png > hamton.txt
 The BB picture now has optimised spaces:
 
 ![Optimisation](/screenshots/scr3.png?raw=true "Optimisation demonstration")
+
+You can also scale image 2x times by the width and use single (without --double option) filling to achieve bigger detalisation:
+
+![Detalisation](/screenshots/scr4.png?raw=true "Detalisation demonstration")
+
